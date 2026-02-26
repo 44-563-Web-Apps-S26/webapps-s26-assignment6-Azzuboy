@@ -1,41 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Progressive Tax Table Computation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="card shadow-sm mb-4">
+          <div class="card-body p-4">
+            <h2 class="mb-4">Ajay Reddy tax table computation</h2>
 
-<h2>Ajay Reddy tax table computation</h2>
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="income" class="form-label">Enter income</label>
+                <input type="number" id="income" name="income" value="5000" class="form-control">
+              </div>
 
-<form>
-  <label for="income">Enter income</label>
-  <input type="number" id="income" name="income" value="5000"> <br>
+              <div class="col-md-6">
+                <label for="baseRate" class="form-label">Enter the base tax rate</label>
+                <input type="number" id="baseRate" name="baseRate" value="0.05" step="0.01" class="form-control">
+              </div>
 
-  <label for="baseRate">Enter the base tax rate</label>
-  <input type="number" id="baseRate" name="baseRate" value="0.05" step="0.01"> <br>
+              <div class="col-md-6">
+                <label for="cutoff" class="form-label">Enter the cut off</label>
+                <input type="number" id="cutoff" name="cutoff" value="7500" class="form-control">
+              </div>
 
-  <label for="cutoff">Enter the cut off</label>
-  <input type="number" id="cutoff" name="cutoff" value="7500"> <br>
+              <div class="col-md-6">
+                <label for="extRate" class="form-label">Enter the extended rate</label>
+                <input type="number" id="extRate" name="extRate" value="0.15" step="0.01" class="form-control">
+              </div>
 
-  <label for="extRate">Enter the extended rate</label>
-  <input type="number" id="extRate" name="extRate" value="0.15" step="0.01"> <br>
+              <div class="col-12">
+                <input type="button" value="Show tax table" onclick="doTax()" class="btn btn-success">
+              </div>
+            </form>
+          </div>
+        </div>
 
-  <input type="button" value="Show tax table" onclick="doTax()">
-</form>
+        <div class="card shadow-sm mb-4">
+          <div class="card-body p-4">
+            <h5 class="mb-3">Choose operation</h5>
+            <form>
+              <div class="form-check">
+                <input type="radio" id="op_power" name="mathOp" value="exponent" onclick="chooseOp()" checked class="form-check-input">
+                <label for="op_power" class="form-check-label">power</label>
+              </div>
 
-<form>
-  <input type="radio" id="op_power" name="mathOp" value="exponent" onclick="chooseOp()" checked>
-  <label for="op_power">power</label> <br>
+              <div class="form-check">
+                <input type="radio" id="op_sum" name="mathOp" value="add" onclick="chooseOp()" class="form-check-input">
+                <label for="op_sum" class="form-check-label">sum</label>
+              </div>
 
-  <input type="radio" id="op_sum" name="mathOp" value="add" onclick="chooseOp()">
-  <label for="op_sum">sum</label> <br>
+              <div class="form-check mb-3">
+                <input type="radio" id="op_mod" name="mathOp" value="mod" onclick="chooseOp()" class="form-check-input">
+                <label for="op_mod" class="form-check-label">mod</label>
+              </div>
+            </form>
 
-  <input type="radio" id="op_mod" name="mathOp" value="mod" onclick="chooseOp()">
-  <label for="op_mod">mod</label> <br>
-</form>
-
-<p id="taxResult">Taxes are:</p>
-<p id="opResult">Operation result will appear here.</p>
+            <div id="taxResult" class="alert alert-info mb-2">Taxes are:</div>
+            <div id="opResult" class="alert alert-secondary mb-0">Operation result will appear here.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script>
 function doTax() {
