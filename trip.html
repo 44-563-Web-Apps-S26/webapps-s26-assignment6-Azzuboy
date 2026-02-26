@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Travel Planner with Cruise Choices</title>
+</head>
+<body>
+
+<h2>Ajay Reddy travel planner</h2>
+
+<form>
+  <input type="checkbox" id="trip_cari" name="trip_cari" value="True">
+  <label for="trip_cari">Caribbean</label> <br>
+
+  <input type="checkbox" id="trip_medi" name="trip_medi" value="True">
+  <label for="trip_medi">Mediterranean</label> <br>
+
+  <input type="checkbox" id="trip_balt" name="trip_balt" value="False">
+  <label for="trip_balt">Baltic</label> <br>
+
+  <input type="button" value="Cruise Choices" onclick="choices()">
+</form>
+
+<p id="result">Trip choices will be shown here.</p>
+
+<script>
+let my_trip = {};
+
+function choices() {
+  my_trip = {};
+  my_trip.cari = document.getElementById("trip_cari").checked;
+  my_trip.medi = document.getElementById("trip_medi").checked;
+  my_trip.balt = document.getElementById("trip_balt").checked;
+
+  document.getElementById("result").innerHTML = JSON.stringify(my_trip);
+}
+</script>
+
+</body>
+</html>
