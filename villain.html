@@ -18,9 +18,14 @@
 
   <p id="result_counts">Caught: 0, Got away: 0</p>
 
+  <div>
+    <img id="treeImage" src="Apple.png" width="150" height="150" onclick="updatePic()" alt="Tree image">
+  </div>
+
   <script>
     let caught = 0;
     let gotAway = 0;
+    let usePic = 1;
 
     function checkVillain() {
       const hiddenVillain = document.getElementById("hidden_villain").value;
@@ -35,6 +40,25 @@
       }
 
       document.getElementById("result_counts").innerHTML = "Caught: " + caught + ", Got away: " + gotAway;
+    }
+
+    function updatePic() {
+      const image = document.getElementById("treeImage");
+
+      switch (usePic) {
+        case 1:
+          image.src = "Zelkova.png";
+          usePic = 2;
+          break;
+        case 2:
+          image.src = "Ziziphus.png";
+          usePic = 3;
+          break;
+        case 3:
+          image.src = "Apple.png";
+          usePic = 1;
+          break;
+      }
     }
   </script>
 </body>
