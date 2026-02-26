@@ -23,7 +23,19 @@
   <input type="button" value="Show tax table" onclick="doTax()">
 </form>
 
+<form>
+  <input type="radio" id="op_power" name="mathOp" value="exponent" onclick="chooseOp()" checked>
+  <label for="op_power">power</label> <br>
+
+  <input type="radio" id="op_sum" name="mathOp" value="add" onclick="chooseOp()">
+  <label for="op_sum">sum</label> <br>
+
+  <input type="radio" id="op_mod" name="mathOp" value="mod" onclick="chooseOp()">
+  <label for="op_mod">mod</label> <br>
+</form>
+
 <p id="taxResult">Taxes are:</p>
+<p id="opResult">Operation result will appear here.</p>
 
 <script>
 function doTax() {
@@ -48,6 +60,30 @@ function doTax() {
   }
 
   document.getElementById("taxResult").innerHTML = "Taxes are: " + taxTable;
+}
+
+function chooseOp() {
+  const income = Number(document.getElementById("income").value);
+  const baseRate = Number(document.getElementById("baseRate").value);
+
+  const powerChecked = document.getElementById("op_power").checked;
+  const sumChecked = document.getElementById("op_sum").checked;
+  const modChecked = document.getElementById("op_mod").checked;
+
+  let resultText = "";
+
+  if (powerChecked) {
+    const value = Math.pow(income, baseRate);
+    resultText = income + " ^ " + baseRate + " is " + value;
+  } else if (sumChecked) {
+    const value = income + baseRate;
+    resultText = income + " + " + baseRate + " is " + value;
+  } else if (modChecked) {
+    const value = income % baseRate;
+    resultText = income + "%" + baseRate + " is " + value;
+  }
+
+  document.getElementById("opResult").innerHTML = resultText;
 }
 </script>
 
