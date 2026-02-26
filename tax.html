@@ -65,26 +65,42 @@ function doTax() {
 function chooseOp() {
   const income = Number(document.getElementById("income").value);
   const baseRate = Number(document.getElementById("baseRate").value);
+  const selectedOp = document.querySelector('input[name="mathOp"]:checked');
+  const out = document.getElementById("opResult");
 
-  const powerChecked = document.getElementById("op_power").checked;
-  const sumChecked = document.getElementById("op_sum").checked;
-  const modChecked = document.getElementById("op_mod").checked;
-
-  let resultText = "";
-
-  if (powerChecked) {
-    const value = Math.pow(income, baseRate);
-    resultText = income + " ^ " + baseRate + " is " + value;
-  } else if (sumChecked) {
-    const value = income + baseRate;
-    resultText = income + " + " + baseRate + " is " + value;
-  } else if (modChecked) {
-    const value = income % baseRate;
-    resultText = income + "%" + baseRate + " is " + value;
+  if (!selectedOp || Number.isNaN(income) || Number.isNaN(baseRate)) {
+    out.innerHTML = "Enter valid values for income and baseRate.";
+    return;
   }
 
-  document.getElementById("opResult").innerHTML = resultText;
+  let value;
+  let resultText;
+
+  switch (selectedOp.value) {
+    case "exponent":
+      value = Math.pow(income, baseRate);
+      resultText = income + " ^ " + baseRate + " is " + value;
+      break;
+    case "add":
+      value = income + baseRate;
+      resultText = income + " + " + baseRate + " is " + value;
+      break;
+    case "mod":
+      if (baseRate === 0) {
+        resultText = income + "%" + baseRate + " is undefined";
+      } else {
+        value = income % baseRate;
+        resultText = income + "%" + baseRate + " is " + value;
+      }
+      break;
+    default:
+      resultText = "Select an operation.";
+  }
+
+  out.innerHTML = resultText;
 }
+
+window.onload = chooseOp;
 </script>
 
 </body>
